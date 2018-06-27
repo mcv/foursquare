@@ -1,0 +1,30 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.container {
+    display: flex;
+    margin: 40px;
+}
+ul.results-list {
+    list-style-type: none;
+}
+ul.results-list li {
+    margin: 3px;
+    padding: 5px;
+    width: 200px;
+    display: block;
+    border: 1px solid #dddddd;
+    box-shadow: 1px 1px #cccccc;
+}
+ul.results-list li:hover {
+    background-color: #eeeeee;
+}
+
+.selection-details {
+    margin: 3px;
+    padding: 5px;
+    width: 1000px;
+    border: 1px solid #dddddd;
+    box-shadow: 1px 1px #cccccc;
+}
