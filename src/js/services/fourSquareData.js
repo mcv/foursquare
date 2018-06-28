@@ -3,7 +3,19 @@ angular.module('foursquare').
     
         this.results = {empty: true};
         this.query = '';
+        this.searchtype = 'search';
         this.details = {};
+    
+        const searchCallback = {
+            search: data => {
+                console.log("search success");
+                this.results = data.response;
+            },
+            explore: data => {
+                console.log("explore success");
+                this.results = data.response;
+            }
+        }
 
         const ll_regex = /\d+(\.\d*)?,\d+(\.\d*)?/;
 
@@ -23,9 +35,8 @@ angular.module('foursquare').
             console.log("query: ",query);
             let queryObject = parseQuery(query);
             console.log("query obj: ",queryObject);
-            fourSquareApi.query(queryObject).$promise.then(data => {
-                this.results = data.response;
-            }, error => {
+            console.log("searchtype: ",this.searchtype);
+            fourSquareApi[this.searchtype](queryObject).$promise.then(searchCallback[this.searchtype], error => {
                 console.log("error: ",error);
             });
         };
@@ -44,25 +55,27 @@ angular.module('foursquare').
             }
         };
 
-        this.toggle = item => {
-            if (this.selected(item)) {
+        this.toggle = venue => {
+            if (this.selected(venue)) { 
                 this.selection = null;
                 this.current = null;
             }
             else {
-                this.selection = item;
-                this.updateDetails(item.venue.id);
+                this.selection = venue;
+                this.updateDetails(venue.id);
             }
         };
 
-        this.selected = item => this.selection === item;
+        this.selected = venue => this.selection === venue;
 
-        this.selectedDetails = () => this.selection? this.details[this.selection.venue.id]: null;
+        this.selectedDetails = () => this.selection? this.details[this.selection.id]: null;
 
         if (geolocation.ll) {
             this.updateQuery(geolocation.ll);
         }
         else {
-            geolocation.register(location => this.updateQuery(location));
+            geolocation.register(location => {
+                if (this.results.empty) this.updateQuery(location)
+            });
         }
     });

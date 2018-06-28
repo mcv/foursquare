@@ -13,7 +13,8 @@ angular.module('foursquare').
         };
 
         return $resource(api_url, defaultParams, {
-            query: {method:'GET', params:{action: 'explore'}},
+            explore: {method:'GET', params:{action: 'explore'}},
+            search: {method:'GET', params:{action: 'search'}},
             details: {method: 'GET', params: {action: 'id'}}
         });
     });
