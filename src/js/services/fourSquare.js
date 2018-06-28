@@ -1,8 +1,8 @@
 angular.module('foursquare').
     factory('fourSquareApi', function($resource){
 
-        let client_id = 'NL3MD2G0IKFWY1EN5Y4LQWWXCFVSFB2LCBIK05AUIEIRWWSC';
-        let client_secret = 'SV1RTHFBPQWNWM0KP4KSU4BBFBLNBQDNPJIF53QBDJL4WLRB';
+        let client_id = 'NWBNFLSAY0LNQIO5XV43NJSRWL2PCOZJ3TCCJ0R4WCVLO1YU';
+        let client_secret = 'B45JUHGJ324PEFEV2S1PWI3QL3Y5SZJ2YOIHEUGQ1KPKUUPB';
         let api_url = 'https://api.foursquare.com/v2/venues/:action';
         let version = '20180323';
 
