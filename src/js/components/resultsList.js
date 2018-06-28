@@ -20,6 +20,9 @@ component('resultsList', {
             {{venue.name}}
             </li>
         </ul>
+        <div ng-show="resultList.data.results.empty" class="please-wait">
+            Please wait while we retrieve your location, or type your own search query above.
+        </div>
     `
 
 });

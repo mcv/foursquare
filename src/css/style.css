@@ -16,13 +16,19 @@ ul.results-list {
 ul.results-list li {
     margin: 3px;
     padding: 5px;
-    width: 200px;
+    width: 300px;
     display: block;
     border: 1px solid #dddddd;
     box-shadow: 1px 1px #cccccc;
 }
 ul.results-list li:hover {
+    background-color: #ffffee;
+}
+ul.results-list li[selected] {
     background-color: #eeeeee;
+}
+ul.results-list li[selected]:hover {
+    background-color: #eeeedd;
 }
 
 .selection-details {
@@ -39,4 +45,12 @@ ul.results-list li:hover {
 }
 .searchtype {
     margin-left: 15px;
+}
+
+.please-wait {
+    margin: 200px;
+    padding: 20px;
+    width: 500px;
+    border: 1px solid #dddddd;
+    box-shadow: 1px 1px #cccccc;
 }
