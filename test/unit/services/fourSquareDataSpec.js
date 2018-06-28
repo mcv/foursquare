@@ -47,8 +47,8 @@ describe('fourSquareData serivce', () => {
     });
     
     it('selects a venue when a venue is toggled when none is selected', () => {
-        let item1 = {item: 1, venue: {id: 1}};
-        let item2 = {item: 2, venue: {id: 2}};
+        let item1 = {id: 1};
+        let item2 = {id: 2};
         let item1Details = {id: 1, name: 'item1'};
         let items = [item1, item2];
 
@@ -59,14 +59,14 @@ describe('fourSquareData serivce', () => {
         httpBackend.flush();
 
         expect(fourSquareData.selection).toEqual(item1);
-        expect(fourSquareData.details[item1.venue.id]).toEqual(item1Details);
-        expect(fourSquareData.details[item2.venue.id]).toBeUndefined();
+        expect(fourSquareData.details[item1.id]).toEqual(item1Details);
+        expect(fourSquareData.details[item2.id]).toBeUndefined();
         expect(fourSquareData.current).toEqual(item1Details);
     });
 
     it('selects a venue when a different venue is toggled than the one currently selected', () => {
-        let item1 = {item: 1, venue: {id: 1}};
-        let item2 = {item: 2, venue: {id: 2}};
+        let item1 = {id: 1};
+        let item2 = {id: 2};
         let item1Details = {id: 1, name: 'item1'};
         let items = [item1, item2];
 
@@ -78,14 +78,14 @@ describe('fourSquareData serivce', () => {
         httpBackend.flush();
 
         expect(fourSquareData.selection).toEqual(item1);
-        expect(fourSquareData.details[item1.venue.id]).toEqual(item1Details);
-        expect(fourSquareData.details[item2.venue.id]).toBeUndefined();
+        expect(fourSquareData.details[item1.id]).toEqual(item1Details);
+        expect(fourSquareData.details[item2.id]).toBeUndefined();
         expect(fourSquareData.current).toEqual(item1Details);
     });
     
     it('unselects the currently selected venue when it is toggled', () => {
-        let item1 = {item: 1, venue: {id: 1}};
-        let item2 = {item: 2, venue: {id: 2}};
+        let item1 = {id: 1};
+        let item2 = {id: 2};
         let item1Details = {id: 1, name: 'item1'};
         let items = [item1, item2];
 
@@ -95,7 +95,7 @@ describe('fourSquareData serivce', () => {
 
         fourSquareData.toggle(item1);
 
-        httpBackend.flush();
+        // httpBackend.flush();
 
         expect(fourSquareData.selection).toBeNull();
         expect(fourSquareData.current).toBeNull();

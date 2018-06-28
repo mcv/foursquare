@@ -21,7 +21,7 @@ component('searchField', {
                 </div>
                 <div>
                     <input type="radio" value="explore" ng-model="search.data.searchtype" ng-change="search.data.updateQuery(search.data.query)"  name="searchtype" />
-                    <label for="search">Recommended</label>
+                    <label for="search">Recommended</label> 
                 </div>
             </div>
         </div>
