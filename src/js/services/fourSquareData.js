@@ -1,12 +1,29 @@
 angular.module('foursquare').
-    service('fourSquareData', function(fourSquareApi){
+    service('fourSquareData', function(fourSquareApi, geolocation){
     
         this.results = {empty: true};
         this.query = '';
         this.details = {};
 
-        this.updateQuery = () => {
-            fourSquareApi.query({ll: '40.7243,-74.0018'}).$promise.then(data => {
+        const ll_regex = /\d+(\.\d*)?,\d+(\.\d*)?/;
+
+        let parseQuery = query => {
+            if (typeof query === "string" && query.match(ll_regex)) {
+                return {ll: query};
+            }
+            if (query.longitude && query.latitude) {
+                return {ll: query.latitude+","+query.longitude};
+            }
+            else {
+                return {near: query};
+            }
+        };
+
+        this.updateQuery = query => {
+            console.log("query: ",query);
+            let queryObject = parseQuery(query);
+            console.log("query obj: ",queryObject);
+            fourSquareApi.query(queryObject).$promise.then(data => {
                 this.results = data.response;
             }, error => {
                 console.log("error: ",error);
@@ -42,5 +59,10 @@ angular.module('foursquare').
 
         this.selectedDetails = () => this.selection? this.details[this.selection.venue.id]: null;
 
-        this.updateQuery();
+        if (geolocation.ll) {
+            this.updateQuery(geolocation.ll);
+        }
+        else {
+            geolocation.register(location => this.updateQuery(location));
+        }
     });
