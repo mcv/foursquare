@@ -8,7 +8,6 @@ service('geolocation', function(){
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
-            console.log("position: ",position);
             this.ll = position.coords.latitude+","+position.coords.longitude;
             callbacks.forEach(callback => callback(position.coords));
         });

@@ -1,0 +1,24 @@
+{
+  "name": "foursquare",
+  "version": "1.0.0",
+  "description": "assessment using foursquare api",
+  "main": "index.html",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mcv/foursquare.git"
+  },
+  "author": "Martijn Vos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mcv/foursquare/issues"
+  },
+  "homepage": "https://github.com/mcv/foursquare#readme",
+  "devDependencies": {
+    "karma": "^2.0.4",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-jasmine": "^1.1.2"
+  }
+}

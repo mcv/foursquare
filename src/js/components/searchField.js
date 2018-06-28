@@ -16,13 +16,13 @@ component('searchField', {
             </label>
             <div class="searchtype">
                 <div>
-                    <input type="radio" value="search" ng-model="search.data.searchtype" name="searchtype" checked />
+                    <input type="radio" value="search" ng-model="search.data.searchtype" ng-change="search.data.updateQuery(search.data.query)"  name="searchtype" />
                     <label for="search">Nearest</label>
                 </div>
                 <div>
-                    <input type="radio" value="explore" ng-model="search.data.seatchtype" name="searchtype" />
+                    <input type="radio" value="explore" ng-model="search.data.searchtype" ng-change="search.data.updateQuery(search.data.query)"  name="searchtype" />
                     <label for="search">Recommended</label>
-                </div>
+                </div>{{search.data.searchtype}}
             </div>
         </div>
     `

@@ -8,14 +8,12 @@ angular.module('foursquare').
     
         const searchCallback = {
             search: data => {
-                console.log("search success");
                 this.results = data.response;
             },
             explore: data => {
-                console.log("explore success");
                 this.results = data.response;
             }
-        }
+        };
 
         const ll_regex = /\d+(\.\d*)?,\d+(\.\d*)?/;
 
@@ -26,19 +24,18 @@ angular.module('foursquare').
             if (query.longitude && query.latitude) {
                 return {ll: query.latitude+","+query.longitude};
             }
-            else {
+            if (typeof query === "string" && query.length > 0) {
                 return {near: query};
             }
         };
 
         this.updateQuery = query => {
-            console.log("query: ",query);
             let queryObject = parseQuery(query);
-            console.log("query obj: ",queryObject);
-            console.log("searchtype: ",this.searchtype);
-            fourSquareApi[this.searchtype](queryObject).$promise.then(searchCallback[this.searchtype], error => {
-                console.log("error: ",error);
-            });
+            if (queryObject) {
+                fourSquareApi[this.searchtype](queryObject).$promise.then(searchCallback[this.searchtype], error => {
+                    console.log("error: ",error);
+                });
+            }
         };
 
         this.updateDetails = id => {
@@ -56,7 +53,7 @@ angular.module('foursquare').
         };
 
         this.toggle = venue => {
-            if (this.selected(venue)) { 
+            if (this.selected(venue)) {
                 this.selection = null;
                 this.current = null;
             }
@@ -75,7 +72,10 @@ angular.module('foursquare').
         }
         else {
             geolocation.register(location => {
-                if (this.results.empty) this.updateQuery(location)
+                if (this.results.empty) {
+                    this.query = location.latitude+","+location.longitude;
+                    this.updateQuery(location);
+                }
             });
         }
     });

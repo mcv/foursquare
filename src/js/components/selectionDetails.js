@@ -3,7 +3,7 @@ angular.module('foursquare').
         bindings:   {
         },
         controllerAs: 'details',
-        controller: ['fourSquareData', '$scope', '$element', function (fourSquareData, $scope, $element) {
+        controller: ['fourSquareData', function (fourSquareData) {
             let details = this;
             details.data = fourSquareData;
             details.venue = () => fourSquareData.current? fourSquareData.current.venue: null;
@@ -16,12 +16,16 @@ angular.module('foursquare').
                         {{category.name}}
                     </span>                
                 </div>
-                <a ng-href="details.venue().canonicalUrl">Visit on FourSquare</a>
-                <a ng-href="details.venue().url">Visit {{details.venue().name}}'s website</a>
-                <p>Phone: {{details.venue().phone}}</p>
-                <p>Address: 
-                    <span ng-repeat="line in details.venue().location.formattedAddress"><br/>{{line}}</span>
-                </p>
+                <div class="links">
+                    <a ng-href="details.venue().canonicalUrl">Visit on FourSquare</a>
+                    <a ng-href="details.venue().url">Visit {{details.venue().name}}'s website</a>
+                </div>
+                <div class="contact" ng-show="details.venue().location.formattedAddress || details.venue().contact.formattedPhone">
+                    <p ng-show="details.venue().contact.formattedPhone">Phone: {{details.venue().contact.formattedPhone}}</p>
+                    <p ng-show="details.venue().location.formattedAddress">Address: 
+                        <span ng-repeat="line in details.venue().location.formattedAddress"><br/>{{line}}</span>
+                    </p>
+                </div>
             </div>
         `
 
