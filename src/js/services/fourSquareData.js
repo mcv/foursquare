@@ -6,10 +6,7 @@ angular.module('foursquare').
         this.details = {};
 
         this.updateQuery = () => {
-            console.log("update()");
             fourSquareApi.query({ll: '40.7243,-74.0018'}).$promise.then(data => {
-                console.log("success: ",data.response);
-                console.log("# results = ",data.response.groups[0].items.length);
                 this.results = data.response;
             }, error => {
                 console.log("error: ",error);
@@ -17,10 +14,8 @@ angular.module('foursquare').
         };
 
         this.updateDetails = id => {
-            console.log("details for ",id);
             if (!this.details[id]) {
                 fourSquareApi.details({action: id}).$promise.then(data => {
-                    console.log("details success: ",data.response);
                     this.details[id] = data.response;
                     this.current = data.response;
                 }, error => {
